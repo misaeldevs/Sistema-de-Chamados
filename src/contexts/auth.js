@@ -2,12 +2,15 @@ import { useState, createContext, useEffect } from "react";
 import { auth, db } from "../services/firebaseConnection"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
     const [loadingAuth, setLoadingAuth] = useState(false)
+    const navigate = useNavigate()
 
     function signIn(email, password) {
         console.log(email, password)
@@ -34,13 +37,20 @@ function AuthProvider({ children }) {
                             avatarUrl: null
                         }
                         setUser(data)
+                        storageUser(data)
                         setLoadingAuth(false)
+                        toast.success("Seja bem vindo a nosso sistema!")
+                        navigate("/dashboard")
                     })
                     .catch((error) => {
                         console.log(error)
                         setLoadingAuth(false)
                     })
             })
+    }
+    
+    function storageUser(data){
+        localStorage.setItem("@sistemasChamados", JSON.stringify(data))
     }
 
     return (
