@@ -3,15 +3,39 @@ import Header from "../../components/Header"
 import Title from "../../components/Title"
 
 import { FiUser } from "react-icons/fi"
+import { db } from "../../services/firebaseConnection"
+import { addDoc, collection } from "firebase/firestore"
+import { toast } from "react-toastify"
 
 export default function Customers(){
     const [nome, setNome] = useState("")
     const [cnpj, setCnpj] = useState("")
     const [endereco, setEndereco] = useState("")
 
-    function handleRegister(e){
+    async function handleRegister(e){
         e.preventDefault()
-        alert("TESTE")
+        
+        if(nome !== "" && cnpj !== "" && endereco !== ""){
+            await addDoc(collection(db, "customers"), {
+                nomeFantasia: nome,
+                cnpj: cnpj,
+                endereco: endereco
+            })
+
+            .then(() => {
+                setNome("")
+                setCnpj("")
+                setEndereco("")
+                toast.success("Empresa cadastrada com sucesso!")
+            })
+            .catch((error) => {
+                console.log(error)
+                toast.error("Erro ao cadastrar!")
+            })
+            
+        } else {
+            toast.error("Por favor, preencha todos os campos!")
+        }
     }
 
     return (
@@ -49,7 +73,7 @@ export default function Customers(){
                         <input
                         type="text"
                         placeholder="Informe o endereço da Empresa"
-                        value={cnpj}
+                        value={endereco}
                         onChange={(e) => setEndereco(e.target.value)}
                         />
 
