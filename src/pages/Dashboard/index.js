@@ -45,14 +45,38 @@ export default function Dashboard() {
                             <tr>
                                 <td data-label="Cliente">Colégio Rezende LTDA</td>
                                 <td data-label="Assunto">Suporte</td>
-                                <td data-label="Status">Em progresso</td>
+                                <td data-label="Status">
+                                    <span className="badge" style={{backgroundColor: "#999"}} >
+                                        Em progresso
+                                    </span>
+                                </td>
                                 <td data-label="Cadastrado">08/04/2023</td>
                                 <td data-label="#">
-                                    <button className="action" style={{backgroundColor: "#3583f6"}}>
+                                    <button className="action" style={{ backgroundColor: "#3583f6" }}>
                                         <FiSearch color="#fff" size={17} />
                                     </button>
-                                    
-                                    <button className="action" style={{backgroundColor: "#f6a935"}}>
+
+                                    <button className="action" style={{ backgroundColor: "#f6a935" }}>
+                                        <FiEdit2 color="#fff" size={17} />
+                                    </button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td data-label="Cliente">Centro Educacional Santa Sara Lima LTDA</td>
+                                <td data-label="Assunto">Suporte</td>
+                                <td data-label="Status">
+                                    <span className="badge" style={{backgroundColor: "#999"}} >
+                                        Em aberto
+                                    </span>
+                                </td>
+                                <td data-label="Cadastrado">08/04/2023</td>
+                                <td data-label="#">
+                                    <button className="action" style={{ backgroundColor: "#3583f6" }}>
+                                        <FiSearch color="#fff" size={17} />
+                                    </button>
+
+                                    <button className="action" style={{ backgroundColor: "#f6a935" }}>
                                         <FiEdit2 color="#fff" size={17} />
                                     </button>
                                 </td>
